@@ -1,4 +1,4 @@
-from djongo import models
+from djongo import models # type: ignore
 
 class User(models.Model):
     email = models.EmailField(unique=True)
