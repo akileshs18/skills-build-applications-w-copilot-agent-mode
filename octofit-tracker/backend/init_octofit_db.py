@@ -9,18 +9,19 @@ db = client["octofit_db"]
 # Create collections with proper structure
 # Users collection
 users = db["users"]
-users.create_index({"email": 1}, unique=True)
+users.create_index([("email", 1)], unique=True)
 
-# Teams collection
+# Create additional collections
 teams = db["teams"]
-
-# Activity collection
 activity = db["activity"]
-
-# Leaderboard collection
 leaderboard = db["leaderboard"]
-
-# Workouts collection
 workouts = db["workouts"]
 
-print("Database and collections initialized successfully.")
+# Ensure collections are created by inserting dummy data
+teams.insert_one({"name": "Dummy Team"})
+activity.insert_one({"type": "Dummy Activity"})
+leaderboard.insert_one({"user": "Dummy User", "score": 0})
+workouts.insert_one({"name": "Dummy Workout", "difficulty": "easy"})
+
+print("All collections initialized successfully.")
+print("Dummy data inserted into all collections.")
